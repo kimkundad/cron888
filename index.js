@@ -1,11 +1,19 @@
 
-const http = require('http');
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT || 3012
+const https = require('https');
+
+app.get('/', (req, res) => res.send('Hello World'))
+app.listen(PORT, () => {
+    console.log(`Server is running on port : ${PORT}`)
+})
 
 var cron = require('node-cron');
-cron.schedule('*/5 * * * *', function(){
+cron.schedule('*/1 * * * *', function(){
    console.log('running a task every two minutes');
 
-   http.get('https://www.xn--888-4nlyax.com/lotto-admin/action/yeekee_runtime_setup.php', (res) => {
+   https.get('https://www.xn--888-4nlyax.com/lotto-admin/action/yeekee_runtime_setup.php', (res) => {
     let rawHtml = '';
     res.on('data', (chunk) => { rawHtml += chunk; });
     res.on('end', () => {
@@ -17,7 +25,7 @@ cron.schedule('*/5 * * * *', function(){
     });
 });
 
-   http.get('https://www.xn--888-4nlyax.com/lotto-admin/action/yeekee_runtime.php', (res) => {
+    https.get('https://www.xn--888-4nlyax.com/lotto-admin/action/yeekee_runtime.php', (res) => {
     let rawHtml = '';
     res.on('data', (chunk) => { rawHtml += chunk; });
     res.on('end', () => {
@@ -31,4 +39,5 @@ cron.schedule('*/5 * * * *', function(){
 
 });
 
+module.exports = app
 console.log('Hello World')

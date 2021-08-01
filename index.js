@@ -1,13 +1,5 @@
 
-const express = require('express')
-const app = express()
-const PORT = process.env.PORT || 3012
 const https = require('https');
-
-app.get('/', (req, res) => res.send('Hello World'))
-app.listen(PORT, () => {
-    console.log(`Server is running on port : ${PORT}`)
-})
 
 var cron = require('node-cron');
 cron.schedule('*/1 * * * *', function(){
@@ -39,5 +31,4 @@ cron.schedule('*/1 * * * *', function(){
 
 });
 
-module.exports = app
 console.log('Hello World')
